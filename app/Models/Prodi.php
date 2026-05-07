@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Periode extends Model
+class Prodi extends Model
 {
     //
     protected $fillable = [
@@ -13,4 +13,9 @@ class Periode extends Model
         'kaprodi',
         'fakultas_id'
     ];
+
+    public function fakultas()
+    {
+        return $this->belongsTo(Fakultas::class);
+    }
 }

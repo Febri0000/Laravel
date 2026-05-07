@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prodi;   
 use Illuminate\Http\Request;
 
-class ProdiControl extends Controller
+class ProdiController extends Controller
 {
      /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        public function index()
-        {
-            $prodis = Prodi::width('fakultas')->get();
-            return view('prodi.index', compact('prodis'))
-        }
+        $prodis = Prodi::with('fakultas')->get();
+        return view('prodi.index', compact('prodis'));
     }
 
     /**
