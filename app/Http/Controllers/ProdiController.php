@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\Prodi;   
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        $fakultas = Fakultas::all();
+        return view('prodi.create',compact('fakultas'));
     }
 
     /**
@@ -29,13 +31,23 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'nama_prodi' => 'required | unique:prodis',
+            'singkatan' => 'required',
+            'kaprodi' => 'required',
+            'fakultas_id' => 'required'
+
+        ]);
+
+        Prodi::create($input);
+
+        return redirect()->route('prodi.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Periode $periode)
+    public function show(Prodi $prodi)
     {
         //
     }
@@ -43,7 +55,7 @@ class ProdiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Periode $periode)
+    public function edit(Prodi $prodi)
     {
         //
     }
@@ -51,7 +63,7 @@ class ProdiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Periode $periode)
+    public function update(Request $request, Prodi $prodi)
     {
         //
     }
@@ -59,7 +71,7 @@ class ProdiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Periode $periode)
+    public function destroy(Prodi $prodi)
     {
         //
     }
