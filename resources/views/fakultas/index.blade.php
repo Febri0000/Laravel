@@ -4,7 +4,7 @@
 
 @section('content')
      <a href="{{route('fakultas.create')}}" class="btn btn-primary">Tambah</a>
-     <a href="{{route('fakultas.create')}}" class="btn btn-warning">Perbarui</a>
+    
      
      <h1>Fakultas</h1>
      <table class="table table-bordered">
@@ -24,11 +24,14 @@
                   <form method="POST" action="{{ route('fakultas.destroy', $item->id) }}">
                   @csrf
                 <input name="_method" type="hidden" value="DELETE">
-                <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm mb-2"
                       data-toggle="tooltip" title='Delete'
                       data-nama='{{ $item->nama_fakultas }}'>Hapus</button>
                   </form>
+
+                   <a href="{{route('fakultas.store')}}" class="btn btn-warning">Edit</a>
                 </td>
+                
               </tr>
             @endforeach
         </tbody>
