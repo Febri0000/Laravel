@@ -67,13 +67,14 @@ class FakultasController extends Controller
     public function update(Request $request, $fakultas)
     {
         $input = $request->validate([
-            'nama_fakultas' => 'required | unique:fakultas, nama_fakultas,' . $fakultas,
+            'nama_fakultas' => 'required | unique:fakultas,nama_fakultas,' . $fakultas->id,
             'singkatan' => 'required'
         ]);
 
-        Fakultas::where('id', $fakultas)->update($input);
+        $fakultas->update($input);
 
-        return redirect()->route('fakultas.index');
+
+        return redirect()->route('fakultas.index')->with('success', 'Data fakultas berhasil ');
     }
 
     /**
