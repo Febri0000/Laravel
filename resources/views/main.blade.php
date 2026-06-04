@@ -29,7 +29,7 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="{{ url('css/adminlte.css') }}"  />
+    <link rel="preload" href="{{ url('css/adminlte.css') }}" as="style" />
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -60,7 +60,7 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="{{ url('css/adminlte.css') }}" >
+    <link rel="stylesheet" href="{{ url('css/adminlte.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
   </head>
   <!--end::Head-->
@@ -110,7 +110,7 @@
                   <div class="d-flex">
                     <div class="flex-shrink-0">
                       <img
-                        src="{{ url('jpg/adminlte.jpg') }}" 
+                        src="{{ url('assets/img/user1-128x128.jpg') }}"
                         alt="User Avatar"
                         class="img-size-50 rounded-circle me-3"
                       />
@@ -136,7 +136,7 @@
                   <div class="d-flex">
                     <div class="flex-shrink-0">
                       <img
-                        src="{{ url('jpg/adminlte.jpg') }}"
+                        src="{{ url('assets/img/user8-128x128.jpg') }}"
                         alt="User Avatar"
                         class="img-size-50 rounded-circle me-3"
                       />
@@ -162,7 +162,7 @@
                   <div class="d-flex">
                     <div class="flex-shrink-0">
                       <img
-                        src="{{ url('jpg/adminlte.jpg') }}"
+                        src="{{ url('assets/img/user3-128x128.jpg') }}"
                         alt="User Avatar"
                         class="img-size-50 rounded-circle me-3"
                       />
@@ -230,7 +230,7 @@
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
-                  src="{{ url('jpg/adminlte.jpg') }}"
+                  src="{{ url('assets/img/user2-160x160.jpg') }}"
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
@@ -240,7 +240,7 @@
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
                   <img
-                    src="{{ url('jpg/adminlte.jpg') }}"
+                    src="{{ url('assets/img/user2-160x160.jpg') }}"
                     class="rounded-circle shadow"
                     alt="User Image"
                   />
@@ -270,7 +270,17 @@
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
                   <a href="#" class="btn btn-outline-secondary">Profile</a>
-                  <a href="#" class="btn btn-outline-danger float-end">Sign out</a>
+                  <!-- Authentication -->
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+
+    <x-dropdown-link :href="route('logout')"
+            onclick="event.preventDefault();
+                        this.closest('form').submit();">
+        {{ __('Log Out') }}
+    </x-dropdown-link>
+</form>
+               
                 </li>
                 <!--end::Menu Footer-->
               </ul>
@@ -290,7 +300,7 @@
           <a href="../index.html" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="../assets/img/AdminLTELogo.png"
+              src="{{ url('assets/img/AdminLTELogo.png') }}"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -344,6 +354,12 @@
                 </ul>
               </li>
               <li class="nav-item">
+                <a href="{{ route('periodes.index') }}" class="nav-link">
+                  <i class="nav-icon bi bi-calendar"></i>
+                  <p>Periode</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('fakultas.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-building"></i>
                   <p>Fakultas</p>
@@ -352,22 +368,17 @@
               <li class="nav-item">
                 <a href="{{ route('prodi.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-bank"></i>
-                  <p>Prodi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('periodes.index') }}" class="nav-link">
-                  <i class="nav-icon bi bi-bank"></i>
-                  <p>Periode</p>
+                  <p>Program Studi</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('mahasiswa.index') }}" class="nav-link">
-                  <i class="nav-icon bi bi-bank"></i>
+                  <i class="nav-icon bi bi-people"></i>
                   <p>Mahasiswa</p>
                 </a>
               </li>
               
+            </ul>
             <!--end::Sidebar Menu-->
           </nav>
         </div>
@@ -429,9 +440,10 @@
                       </button>
                     </div>
                   </div>
-                  <div class="card-body"> @yield('content')</div>
+                  <div class="card-body">
+                    @yield('content')
+                  </div>
                   <!-- /.card-body -->
-                   
                   <div class="card-footer">Footer</div>
                   <!-- /.card-footer-->
                 </div>
@@ -477,7 +489,7 @@
       crossorigin="anonymous"
     ></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="{{ url('js/adminlte.js') }} "></script>
+    <script src="{{ url('js/adminlte.js') }}"></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
@@ -509,28 +521,29 @@
     </script>
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
-
+    {{-- jQuery cdn --}}
     <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
 
+    {{-- sweetalert --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script type="text/javascript">
-    $('.show_confirm').click(function(event) {
-        var form = $(this).closest("form");
-        var nama = $(this).data("nama");
-        event.preventDefault();
-        swal({
-                title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-    });
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var nama = $(this).data("nama");
+            event.preventDefault();
+            swal({
+                    title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
     </script>
   </body>
   <!--end::Body-->
